@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yönetim Paneli - Mismo Teknoloji</title>
+    
+    <!-- Bootstrap ve İkonlar -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    
+    <!-- Grafik Kütüphanesi -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* GENEL SAYFA AYARLARI */
+        body { 
+            background-color: #f4f6f9; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden; /* Sağa sola taşmayı engelle */
+        }
+        
+        /* SOL MENÜ (SABİT) */
+        .sidebar {
+            background-color: #343a40; /* Koyu Gri */
+            height: 100vh; /* Ekran boyu kadar */
+            width: 250px;
+            position: fixed; /* Ekrana çivile */
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            color: white;
+            z-index: 1000;
+        }
+        
+        .sidebar h3 {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #4b545c;
+            padding-bottom: 15px;
+        }
+
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #c2c7d0;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .sidebar i { width: 25px; text-align: center; margin-right: 10px; }
+
+        /* SAĞ İÇERİK ALANI (KAYAN KISIM) */
+        .content-wrapper {
+            margin-left: 250px; /* Sidebar kadar boşluk bırak */
+            padding: 30px;
+            width: calc(100% - 250px);
+        }
+
+        /* KART TASARIMLARI */
+        .card {
+            border: none;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            background: white;
+        }
+
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: bold;
+            padding: 15px 20px;
+            font-size: 18px;
+        }
+
+        /* TABLO VE RESİM AYARLARI (PATLAMAYI ÖNLER) */
+        .table img {
+            width: 60px;       /* Genişlik sabit */
+            height: 60px;      /* Yükseklik sabit */
+            object-fit: contain; /* Resmi kesmeden sığdır */
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background: #fff;
+        }
+        
+        .table td { vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+<!-- SOL MENÜ -->
+<div class="sidebar">
+    <h3>MISMO ADMIN</h3>
+    <a href="admin-dashboard.html" style="background-color: #007bff; color: white;"><i class="fa fa-box"></i> Ürün Yönetimi</a>
+    <a href="admin-duyurular.html"><i class="fa fa-bullhorn"></i> Duyuru Yönetimi</a>
+    <a href="index.html" target="_blank"><i class="fa fa-globe"></i> Siteye Git</a>
+    <a href="index.html" onclick="cikisYap()" style="margin-top: 50px; color: #ff6b6b;"><i class="fa fa-sign-out-alt"></i> Çıkış Yap</a>
+</div>
+
+<!-- SAĞ İÇERİK -->
+<div class="content-wrapper">
+    
+    <h2 class="mb-4">Ürün Yönetimi ve İstatistikler</h2>
+
+    <!-- İSTATİSTİKLER VE GRAFİK -->
+    <div class="row">
+        <!-- Grafik -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">📊 Kategori Dağılımı</div>
+                <div class="card-body">
+                    <!-- Grafik yüksekliğini sınırla -->
+                    <div style="height: 300px; width: 100%;">
+                        <canvas id="urunGrafigi"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Özet Kartlar -->
+        <div class="col-lg-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Toplam Ürün</h5>
+                    <p class="display-3 fw-bold" id="toplamUrunSayisi">0</p>
+                </div>
+            </div>
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Toplam Stok Değeri</h5>
+                    <p class="fs-4 fw-bold" id="toplamDeger">0 TL</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YENİ ÜRÜN EKLEME FORMU -->
+    <div class="card">
+        <div class="card-header bg-warning text-dark">
+            <i class="fa fa-plus-circle"></i> Yeni Ürün Ekle
+        </div>
+        <div class="card-body">
+            <form id="urunEkleForm">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Ürün Adı</label>
+                        <input type="text" id="yeniAd" class="form-control" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Kategori</label>
+                        <select id="yeniKategori" class="form-select">
+                            <option>Laptop</option>
+                            <option>Masaüstü</option>
+                            <option>Ekipman</option>
+                            <option>Monitör</option>
+                            <option>Konsol</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label">Fiyat</label>
+                        <input type="text" id="yeniFiyat" class="form-control" placeholder="15.000 TL" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Resim Linki (URL)</label>
+                        <input type="text" id="yeniResim" class="form-control" placeholder="resim1.jpg, resim2.jpg">
+                        <small class="text-muted" style="font-size: 11px;">Çoklu resim için virgül kullanın.</small>
+                    </div>
+                    
+                    <!-- AÇIKLAMA ALANI -->
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Ürün Açıklaması / Özellikler</label>
+                        <textarea id="yeniAciklama" class="form-control" rows="4" placeholder="Ürün özelliklerini buraya yazın... (Enter tuşu alt satıra geçer)"></textarea>
+                    </div>
+
+                    <div class="col-md-12 text-end">
+                        <button type="submit" class="btn btn-success px-5 fw-bold">KAYDET</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MEVCUT ÜRÜNLER LİSTESİ -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-list"></i> Mevcut Ürün Listesi
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th width="100">Görsel</th>
+                        <th>Ürün Adı</th>
+                        <th>Kategori</th>
+                        <th>Fiyat</th>
+                        <th width="100">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody id="adminUrunTablosu">
+                    <!-- JS DOLDURACAK -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- SCRIPT DOSYALARI -->
+<script src="assets/js/data.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+    let benimGrafigim = null;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        tabloyuGuncelle();
+        grafigiCiz();
+    });
+
+    // 1. TABLOYU DOLDURMA FONKSİYONU
+    function tabloyuGuncelle() {
+        let urunler = JSON.parse(localStorage.getItem('urunler')) || [];
+        let tablo = document.getElementById('adminUrunTablosu');
+        tablo.innerHTML = "";
+        
+        // İstatistikleri Güncelle
+        document.getElementById('toplamUrunSayisi').innerText = urunler.length;
+        
+        let toplamTutar = 0;
+        urunler.forEach(u => {
+            let fiyatSayi = parseInt(u.fiyat.replace(/[^0-9]/g, ''));
+            if(!isNaN(fiyatSayi)) toplamTutar += fiyatSayi;
+        });
+        document.getElementById('toplamDeger').innerText = toplamTutar.toLocaleString('tr-TR') + " TL";
+
+        // Tablo Satırlarını Oluştur
+        urunler.forEach(function(urun) {
+            // Sadece ilk resmi göster, trim() ile boşlukları sil
+            let anaResim = urun.resim.split(',')[0].trim();
+
+            let satir = `
+                <tr>
+                    <td><img src="${anaResim}" alt="Ürün"></td>
+                    <td class="fw-bold">${urun.ad}</td>
+                    <td><span class="badge bg-secondary">${urun.kategori}</span></td>
+                    <td style="color: green; font-weight: bold;">${urun.fiyat}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="urunSil(${urun.id})"><i class="fa fa-trash"></i> Sil</button>
+                    </td>
+                </tr>
+            `;
+            tablo.innerHTML += satir;
+        });
+    }
+
+    // 2. GRAFİK ÇİZME FONKSİYONU
+    function grafigiCiz() {
+        let urunler = JSON.parse(localStorage.getItem('urunler')) || [];
+        let kategoriSayilari = {};
+
+        urunler.forEach(u => {
+            if(kategoriSayilari[u.kategori] !== undefined) kategoriSayilari[u.kategori]++;
+            else kategoriSayilari[u.kategori] = 1;
+        });
+
+        const ctx = document.getElementById('urunGrafigi').getContext('2d');
+        if(benimGrafigim) benimGrafigim.destroy();
+
+        benimGrafigim = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(kategoriSayilari),
+                datasets: [{
+                    label: 'Adet',
+                    data: Object.values(kategoriSayilari),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, ticks: { stepSize: 1 } }
+                }
+            }
+        });
+    }
+
+    // 3. YENİ ÜRÜN KAYDETME
+    document.getElementById('urunEkleForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Resim boşsa varsayılan ata
+        let girilenResim = document.getElementById('yeniResim').value;
+        if(girilenResim.trim() === "") girilenResim = "assets/images/featured-01.png";
+
+        // Açıklamadaki Enter'ları <br> yap
+        let girilenAciklama = document.getElementById('yeniAciklama').value;
+        girilenAciklama = girilenAciklama.replace(/\n/g, "<br>");
+        if(girilenAciklama.trim() === "") girilenAciklama = "Detaylı açıklama girilmedi.";
+
+        let yeniUrun = {
+            id: Date.now(),
+            ad: document.getElementById('yeniAd').value,
+            kategori: document.getElementById('yeniKategori').value,
+            fiyat: document.getElementById('yeniFiyat').value,
+            resim: girilenResim,
+            aciklama: girilenAciklama
+        };
+
+        let urunler = JSON.parse(localStorage.getItem('urunler')) || [];
+        urunler.unshift(yeniUrun);
+        localStorage.setItem('urunler', JSON.stringify(urunler));
+
+        alert("Ürün başarıyla eklendi!");
+        document.getElementById('urunEkleForm').reset();
+        tabloyuGuncelle();
+        grafigiCiz();
+    });
+
+    // 4. SİLME İŞLEMİ
+    function urunSil(silinecekId) {
+        if(confirm("Bu ürünü silmek istediğinize emin misiniz?")) {
+            let urunler = JSON.parse(localStorage.getItem('urunler')) || [];
+            urunler = urunler.filter(urun => urun.id !== silinecekId);
+            localStorage.setItem('urunler', JSON.stringify(urunler));
+            tabloyuGuncelle();
+            grafigiCiz();
+        }
+    }
+
+    function cikisYap() { window.location.href = 'index.html'; }
+</script>
+
+</body>
+</html>

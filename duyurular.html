@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Duyurular - Mismo Teknoloji</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <!-- DROPDOWN MENÜ İÇİN EK CSS (Head etiketinin içine, diğer linklerin altına yapıştır) -->
+<style>
+    /* Dropdown Menü Temel Ayarları */
+    ul.nav li {
+        position: relative;
+    }
+    
+    /* Alt Menü Gizleme */
+    ul.nav li ul {
+        position: absolute;
+        top: 60px; /* Menü yüksekliğine göre ayar */
+        left: 0;
+        width: 200px;
+        background-color: #0071f8; /* Mavi Arka Plan */
+        padding: 10px 0;
+        border-radius: 10px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+        list-style: none;
+    }
+
+    /* Hover Durumu (Üzerine gelince aç) */
+    ul.nav li:hover > ul {
+        opacity: 1;
+        visibility: visible;
+        top: 100%; /* Tam altına yerleş */
+    }
+
+    /* Alt Menü Linkleri */
+    ul.nav li ul li {
+        display: block;
+        margin: 0;
+        text-align: left;
+        padding: 0;
+    }
+
+    ul.nav li ul li a {
+        display: block;
+        padding: 10px 20px !important;
+        color: #fff !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        background: transparent !important;
+        text-transform: capitalize !important;
+        height: auto !important;
+        line-height: normal !important;
+        border-radius: 0 !important;
+    }
+
+    ul.nav li ul li a:hover {
+        background-color: #ee626b !important; /* Hover rengi kırmızı */
+        color: #fff !important;
+        padding-left: 25px !important; /* Hafif sağa kayma efekti */
+    }
+</style>
+  </head>
+
+<body>
+
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="index.html" class="logo">
+                        <h3 style="color: #fff; margin-top: 25px; font-weight: 700;">MISMO</h3>
+                    </a>
+                    <!-- GÜNCELLENMİŞ MENÜ (HEADER İÇİNDEKİ UL.NAV KISMI) -->
+<ul class="nav">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    
+    <!-- Ürünlerimiz Dropdown -->
+    <li>
+        <a href="shop.html">Ürünlerimiz <i class="fa fa-angle-down" style="font-size: 12px; margin-left: 5px;"></i></a>
+        <ul>
+            <li><a href="shop.html">Tüm Ürünler</a></li>
+            <li><a href="shop.html?filter=.Laptop">Laptop</a></li>
+            <li><a href="shop.html?filter=.Masaüstü">Masaüstü</a></li>
+            <li><a href="shop.html?filter=.Monitör">Monitör</a></li>
+            <li><a href="shop.html?filter=.Ekipman">Ekipman</a></li>
+            <li><a href="shop.html?filter=.Konsol">Konsol</a></li>
+        </ul>
+    </li>
+
+    <!-- Yeni Vizyon Misyon -->
+    <li><a href="vizyon-misyon.html">Vizyon-Misyon</a></li>
+
+    <!-- Birimler Dropdown -->
+    <li>
+        <a href="javascript:void(0)">Birimler <i class="fa fa-angle-down" style="font-size: 12px; margin-left: 5px;"></i></a>
+        <ul>
+            <li><a href="teknik-destek.html">Teknik Destek</a></li>
+            <li><a href="musteri-hizmetleri.html">Müşteri Hizmetleri</a></li>
+            <li><a href="lojistik.html">Lojistik Birimi</a></li>
+        </ul>
+    </li>
+
+    <li><a href="duyurular.html">Duyurular</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+    
+    <!-- Sepet ve Admin -->
+    <li><a href="#" onclick="sepetiAc(); return false;">🛒 Sepetim <span id="sepetSayisi" class="badge bg-danger" style="border-radius: 50%; font-size: 10px;">0</span></a></li>
+    <li><a href="admin-login.html" style="background-color: #ee626b; color: white; padding: 0 15px; border-radius: 20px;">Yönetim Paneli</a></li>
+</ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Duyurular ve Kampanyalar</h3>
+          <span class="breadcrumb"><a href="index.html">Ana Sayfa</a> > Duyurular</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="row" id="duyuru-listesi">
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      
+      <!-- 1. SLOGAN (Üstten boşluk verildi, köşeye yapışmıyor) -->
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 style="color: #fff; font-weight: 700; margin-top: 60px; margin-bottom: 40px; letter-spacing: 1px;">
+            "En ucuz fiyata en kaliteli ürünler!"
+          </h3>
+        </div>
+      </div>
+
+      <!-- 2. BİLGİ SÜTUNLARI (Hizalama düzeltildi) -->
+      <div class="row" style="text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; margin-bottom: 20px;">
+        
+        <!-- İletişim Bilgileri -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <h5 style="color: #ee626b; margin-bottom: 15px; font-weight: bold;">İletişim</h5>
+            <p style="color: #ccc; line-height: 1.6; font-size: 14px;">
+                <i class="fa fa-map-marker" style="margin-right: 10px; color: #fff;"></i> Kushimato sk./İnönü,<br>
+                <span style="margin-left: 25px;">33130 Yenişehir/Mersin</span><br><br>
+                <i class="fa fa-phone" style="margin-right: 10px; color: #fff;"></i> +324 234 1242
+            </p>
+        </div>
+
+        <!-- Sosyal Medya -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <h5 style="color: #ee626b; margin-bottom: 15px; font-weight: bold;">Sosyal Medya</h5>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;">
+                    <a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">
+                        <i class="fab fa-instagram" style="margin-right: 10px; color: #fff;"></i> @mismoteknoloji
+                    </a>
+                </li>
+                <li>
+                    <a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">
+                        <i class="fab fa-facebook" style="margin-right: 10px; color: #fff;"></i> Mismo Teknoloji
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tasarımcı Bilgisi (Boşluklar alındı, sola hizalandı) -->
+        <div class="col-lg-4 col-md-12 mb-4">
+            <h5 style="color: #ee626b; margin-bottom: 15px; font-weight: bold;">Tasarımcı</h5>
+            
+            <!-- Açıklama metni -->
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 15px; line-height: 1.5;">
+                Bu web sitesi, modern web tasarım prensipleri kullanılarak tasarlanmıştır.
+            </p>
+            
+            <div style="background: rgba(255,255,255,0.15); padding: 8px 15px; border-radius: 8px; display: inline-block;">
+                <span style="color: #fff; font-weight: 600; font-size: 14px;">Meliha Damla Coşkun</span>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-12">
+        <p style="font-size: 13px;">Telif Hakkı © 2025 Mismo Teknoloji. Tüm hakları saklıdır.</p>
+      </div>
+    </div>
+  </footer>
+  <div class="modal fade" id="sepetModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #0071f8; color: white;">
+          <h5 class="modal-title">Alışveriş Sepetim</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div id="sepetBosUyari" class="text-center" style="display: none;">
+              <i class="fa fa-shopping-cart" style="font-size: 50px; color: #ccc; margin-bottom: 20px;"></i>
+              <p>Sepetinizde henüz ürün yok.</p>
+          </div>
+
+          <ul id="sepetListesi" class="list-group list-group-flush">
+          </ul>
+
+          <div id="sepetOzet" class="mt-3 text-end" style="border-top: 1px solid #eee; padding-top: 15px;">
+              <h5>Toplam: <span id="sepetToplam" style="color: #ee626b; font-weight: bold;">0 TL</span></h5>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Alışverişe Dön</button>
+          <button type="button" class="btn btn-success" onclick="satinAl()">Satın Alı Tamamla</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="duyuruModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalBaslik" style="color: #333; font-weight: bold;">Duyuru Başlığı</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+        </div>
+        <div class="modal-body" style="color: #666; padding: 30px;">
+          <p id="modalTarih" style="font-size: 14px; color: #ee626b; font-weight: bold;"></p>
+          <hr>
+          <p id="modalIcerik">İçerik yükleniyor...</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/data.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let duyurular = JSON.parse(localStorage.getItem('duyurular'));
+        let container = document.getElementById('duyuru-listesi');
+
+        if(duyurular && container) {
+            container.innerHTML = "";
+            
+            duyurular.forEach(function(duyuru) {
+                let kart = `
+                <div class="col-lg-6 mb-4">
+                    <div class="item" style="background: #f7f7f7; padding: 30px; border-radius: 20px; position: relative;">
+                        <div style="font-size: 14px; color: #ee626b; font-weight: 700; margin-bottom: 10px;">
+                           📅 ${duyuru.tarih}
+                        </div>
+                        <h4 style="font-size: 22px; font-weight: 700; margin-bottom: 15px; color: #1e1e1e;">${duyuru.baslik}</h4>
+                        <p>${duyuru.ozet}</p>
+                        <div class="main-button" style="margin-top: 20px;">
+                            <a href="#" onclick="modalAc(${duyuru.id}); return false;">Detayları Oku</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+                container.innerHTML += kart;
+            });
+        }
+    });
+
+    function modalAc(id) {
+        let duyurular = JSON.parse(localStorage.getItem('duyurular'));
+        let secilen = duyurular.find(d => d.id == id);
+
+        if(secilen) {
+            document.getElementById('modalBaslik').innerText = secilen.baslik;
+            document.getElementById('modalTarih').innerText = "Yayınlanma Tarihi: " + secilen.tarih;
+            document.getElementById('modalIcerik').innerText = secilen.icerik;
+
+            var myModal = new bootstrap.Modal(document.getElementById('duyuruModal'));
+            myModal.show();
+        }
+    }
+  </script>
+
+  </body>
+</html>
